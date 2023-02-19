@@ -1,13 +1,15 @@
-import Category from './components/Category';
-import './index.css'
+import { BrowserRouter } from "react-router-dom";
+import Category from "./components/Category";
+import "./index.css";
 import Pages from "./pages/Pages";
-
 
 function App() {
   return (
     <div className="App">
-      <Category/>
-      <Pages/>
+      <BrowserRouter>
+        <Category />
+        <Pages />
+      </BrowserRouter>
     </div>
   );
 }

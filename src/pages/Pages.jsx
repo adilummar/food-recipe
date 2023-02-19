@@ -1,12 +1,15 @@
-import React from 'react'
-import Home from './Home'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Cuisine from "./Cuisine";
+import Home from "./Home";
 
 function Pages() {
   return (
-    <div>
-      <Home/>
-    </div>
-  )
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cuisine/:id" element={<Cuisine />} />
+      </Routes>
+  );
 }
 
-export default Pages
+export default Pages;

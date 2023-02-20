@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Cuisine() {
@@ -9,12 +9,15 @@ function Cuisine() {
     const api = await fetch(`
         https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&cuisine=${name}
         `);
-    api.json().then((data) => {
-      setCuisine(data.results);
-      console.log(data.results);
-    }).catch((err)=>{
-        console.log(err.message)
-    })
+    api
+      .json()
+      .then((data) => {
+        setCuisine(data.results);
+        console.log(data.results);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   useEffect(() => {
@@ -26,8 +29,10 @@ function Cuisine() {
         cuisine.map((item) => {
           return (
             <Card>
-              <img src={item.image} alt={item.name} />
-              <h4>{item.title}</h4>
+              <Link to={'/recipe/' + item.id}>
+                <img src={item.image} alt={item.name} />
+                <h4>{item.title}</h4>
+              </Link>
             </Card>
           );
         })
@@ -58,7 +63,6 @@ const Card = styled.div`
     text-align: center;
     padding: 1rem;
   }
-
 `;
 
 export default Cuisine;

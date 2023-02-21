@@ -36,7 +36,7 @@ const FormStyle = styled.form`
     background: linear-gradient(35deg, #494949, #313131);
     font-size: 1.5rem;
     color: white;
-    padding: 0.5rem 3.5rem;
+    padding: 0.5rem 4rem;
     border-radius: 2rem;
     outline: none;
     border: none;

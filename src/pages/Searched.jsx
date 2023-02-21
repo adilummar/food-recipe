@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Searched() {
   const [searched, setSearched] = useState([]);
@@ -19,7 +20,12 @@ function Searched() {
   };
 
   return (
-    <Grid>
+    <Grid
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       {searched.map((item) => {
         return (
           <Card key={item.id}>
@@ -34,7 +40,7 @@ function Searched() {
   );
 }
 
-const Grid = styled.div`
+const Grid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   grid-gap: 3rem;

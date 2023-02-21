@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -20,7 +21,12 @@ function Recipe() {
     console.log(data);
   };
   return (
-    <DetailedWrapped>
+    <DetailedWrapped
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div>
         <h2>{details.title}</h2>
         <img src={details.image} alt="" />
@@ -40,27 +46,25 @@ function Recipe() {
         >
           ingredients
         </Buttons>
-        {
-          activeTab === "instructions" ? (
-            <div>
-          <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
-          <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
-        </div>
-          ) : (
-            <ul>
-          {details.extendedIngredients && details.extendedIngredients.map(ingredients=>{
-            return(
-              <li key={ingredients.id}>{ingredients.original}</li>
-              )
-            })}
-        </ul> )
-          }
+        {activeTab === "instructions" ? (
+          <div>
+            <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
+            <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
+          </div>
+        ) : (
+          <ul>
+            {details.extendedIngredients &&
+              details.extendedIngredients.map((ingredients) => {
+                return <li key={ingredients.id}>{ingredients.original}</li>;
+              })}
+          </ul>
+        )}
       </Info>
     </DetailedWrapped>
   );
 }
 
-const DetailedWrapped = styled.div`
+const DetailedWrapped = styled(motion.div)`
   margin-top: 3rem;
   margin-bottom: 2rem;
   display: flex;

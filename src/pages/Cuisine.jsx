@@ -9,36 +9,29 @@ function Cuisine() {
     const api = await fetch(`
         https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&cuisine=${name}
         `);
-    api
-      .json()
-      .then((data) => {
-        setCuisine(data.results);
-        console.log(data.results);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    api.json().then((data) => {
+      setCuisine(data.results);
+      console.log(data.results);
+    });
   };
 
   useEffect(() => {
     getCuisine(params.id);
   }, [params.id]);
+
   return (
     <Grid>
-      {cuisine.length > 0 ? (
-        cuisine.map((item) => {
+      {cuisine && cuisine.map((item) => {
           return (
             <Card>
-              <Link to={'/recipe/' + item.id}>
+              <Link to={"/recipe/" + item.id}>
                 <img src={item.image} alt={item.name} />
                 <h4>{item.title}</h4>
               </Link>
             </Card>
           );
         })
-      ) : (
-        <p>loading</p>
-      )}
+       }
     </Grid>
   );
 }

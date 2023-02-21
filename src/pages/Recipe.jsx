@@ -40,17 +40,21 @@ function Recipe() {
         >
           ingredients
         </Buttons>
-        <div>
+        {
+          activeTab === "instructions" ? (
+            <div>
           <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
           <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
         </div>
-        <ul>
+          ) : (
+            <ul>
           {details.extendedIngredients && details.extendedIngredients.map(ingredients=>{
             return(
               <li key={ingredients.id}>{ingredients.original}</li>
-            )
-          })}
-        </ul>
+              )
+            })}
+        </ul> )
+          }
       </Info>
     </DetailedWrapped>
   );
@@ -75,7 +79,7 @@ const DetailedWrapped = styled.div`
 
   li {
     font-size: 1.2rem;
-    line-height: 1.5rem;
+    line-height: 2.5rem;
   }
 `;
 
